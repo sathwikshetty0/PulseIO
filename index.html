@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseIO - Advanced Technology Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Enhanced Color Palette */
+            --primary-blue: #4F46E5;
+            --primary-purple: #7C3AED;
+            --primary-teal: #0D9488;
+            --primary-green: #059669;
+            --primary-orange: #EA580C;
+            --primary-red: #DC2626;
+            --primary-pink: #DB2777;
+            --primary-cyan: #0891B2;
+            
+            /* Background Colors */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-accent: #F1F5F9;
+            --bg-dark: #0F172A;
+            
+            /* Text Colors */
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            --gradient-secondary: linear-gradient(135deg, #0D9488 0%, #059669 100%);
+            --gradient-accent: linear-gradient(135deg, #EA580C 0%, #DC2626 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 0 1px rgb(79 70 229 / 0.1), 0 4px 6px -1px rgb(79 70 229 / 0.1);
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-base: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 50%;
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-4);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(241, 245, 249, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: var(--transition-base);
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4) 0;
+        }
+        
+        .nav__logo h2 {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .nav__menu {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+        
+        .nav__link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-base);
+            transition: var(--transition-fast);
+        }
+        
+        .nav__link:hover {
+            color: var(--primary-blue);
+            background: rgba(79, 70, 229, 0.1);
+        }
+        
+        .nav__toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(79, 70, 229, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(79, 70, 229, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(60px) translateY(60px); }
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+            align-items: center;
+        }
+        
+        .hero__content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: var(--space-6);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero__content p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-8);
+            line-height: 1.7;
+        }
+        
+        .hero__buttons {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: var(--space-4) var(--space-8);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn--primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .btn--outline {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+        
+        .btn--outline:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Tech Icons Grid */
+        .tech-icons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+        }
+        
+        .tech-icon {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(241, 245, 249, 0.8);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+            position: relative;
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+        
+        .tech-icon:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
+        }
+        
+        .tech-icon__symbol {
+            font-size: 3rem;
+            margin-bottom: var(--space-3);
+            display: block;
+        }
+        
+        .tech-icon__name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+        
+        .tech-icon__tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.95);
+            color: white;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-base);
+            font-size: 0.875rem;
+            width: 200px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-base);
+            z-index: 10;
+        }
+        
+        .tech-icon:hover .tech-icon__tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(100% + 10px);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: var(--space-20) 0;
+            background: var(--bg-secondary);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-16);
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: var(--space-4);
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+        
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-8);
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(241, 245, 249, 0.8);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            position: relative;
+            transition: var(--transition-base);
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-base);
+        }
+        
+        .service-card:nth-child(2)::before { background: var(--gradient-secondary); }
+        .service-card:nth-child(3)::before { background: var(--gradient-accent); }
+        .service-card:nth-child(4)::before { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+        .service-card:nth-child(5)::before { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+        .service-card:nth-child(6)::before { background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%); }
+        
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card__icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-6);
+            display: block;
+        }
+        
+        .service-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            color: var(--text-primary);
+        }
+        
+        .service-card__description {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-6);
+            line-height: 1.7;
+        }
+        
+        .service-card__features {
+            list-style: none;
+        }
+        
+        .service-card__features li {
+            padding: var(--space-2) 0;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: var(--space-6);
+        }
+        
+        .service-card__features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+        
+        /* About Section */
+        .about {
+            padding: var(--space-20) 0;
+        }
+        
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+            align-items: center;
+        }
+        
+        .about__text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-6);
+            color: var(--text-primary);
+        }
+        
+        .about__text p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-4);
+            line-height: 1.8;
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+        }
+        
+        .expertise-item {
+            background: var(--bg-accent);
+            padding: var(--space-4);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            transition: var(--transition-base);
+        }
+        
+        .expertise-item:hover {
+            background: rgba(79, 70, 229, 0.1);
+            transform: translateX(4px);
+        }
+        
+        .expertise-item i {
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: var(--space-20) 0;
+            background: var(--bg-secondary);
+        }
+        
+        .contact .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+        
+        .contact-item i {
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-6);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: var(--space-4);
+            border: 2px solid rgba(241, 245, 249, 0.8);
+            border-radius: var(--radius-base);
+            background: rgba(255, 255, 255, 0.8);
+            transition: var(--transition-fast);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: var(--space-16) 0 var(--space-8);
+        }
+        
+        .footer .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--space-8);
+        }
+        
+        .footer h3 {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-4);
+        }
+        
+        .footer a {
+            color: #94A3B8;
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-base);
+            transition: var(--transition-base);
+        }
+        
+        .social-link:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav__menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: var(--space-8);
+                transition: var(--transition-base);
+            }
+            
+            .nav__menu.active {
+                left: 0;
+            }
+            
+            .nav__toggle {
+                display: block;
+            }
+            
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero__content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tech-icons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .services__grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about .container,
+            .contact .container,
+            .footer .container {
+                grid-template-columns: 1fr;
+                gap: var(--space-8);
+            }
+            
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <h2>PulseIO</h2>
+            </div>
+            <ul class="nav__menu">
+                <li><a href="#home" class="nav__link">Home</a></li>
+                <li><a href="#services" class="nav__link">Services</a></li>
+                <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+            <button class="nav__toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h1>Advanced Technology Solutions</h1>
+                <p>Comprehensive freelance services in IoT, embedded systems, robotics, AI/ML, computer vision, and cognitive systems. Transform your innovative ideas into intelligent, connected solutions.</p>
+                <div class="hero__buttons">
+                    <a href="#services" class="btn btn--primary">Explore Services</a>
+                    <a href="#contact" class="btn btn--outline">Get Started</a>
+                </div>
+            </div>
+            <div class="tech-icons">
+                <div class="tech-icon">
+                    <span class="tech-icon__symbol">📡</span>
+                    <div class="tech-icon__name">ESP32</div>
+                    <div class="tech-icon__tooltip">Powerful microcontroller for IoT projects with WiFi and Bluetooth connectivity</div>
+                </div>
+                <div class="tech-icon">
+                    <span class="tech-icon__symbol">⚡</span>
+                    <div class="tech-icon__name">Arduino</div>
+                    <div class="tech-icon__tooltip">Open-source electronics platform ideal for embedded projects and prototyping</div>
+                </div>
+                <div class="tech-icon">
+                    <span class="tech-icon__symbol">🧠</span>
+                    <div class="tech-icon__name">AI/ML</div>
+                    <div class="tech-icon__tooltip">Artificial Intelligence and Machine Learning implementations for smart systems</div>
+                </div>
+                <div class="tech-icon">
+                    <span class="tech-icon__symbol">👁️</span>
+                    <div class="tech-icon__name">OpenCV</div>
+                    <div class="tech-icon__tooltip">Computer vision and image processing frameworks for visual recognition</div>
+                </div>
+                <div class="tech-icon">
+                    <span class="tech-icon__symbol">🔍</span>
+                    <div class="tech-icon__name">Sensors</div>
+                    <div class="tech-icon__tooltip">Various sensor integrations including temperature, humidity, motion, and more</div>
+                </div>
+                <div class="tech-icon">
+                    <span class="tech-icon__symbol">🤖</span>
+                    <div class="tech-icon__name">Robotics</div>
+                    <div class="tech-icon__tooltip">Autonomous robots with intelligent navigation and control systems</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Cutting-edge technology solutions tailored to your innovative needs</p>
+            </div>
+            <div class="services__grid">
+                <div class="service-card">
+                    <span class="service-card__icon">🌐</span>
+                    <h3 class="service-card__title">IoT Solutions</h3>
+                    <p class="service-card__description">Smart device development, sensor integration, ESP32/Arduino projects, and connected systems</p>
+                    <ul class="service-card__features">
+                        <li>ESP32 Development</li>
+                        <li>Sensor Integration</li>
+                        <li>Wireless Communication</li>
+                        <li>Smart Automation</li>
+                        <li>Real-time Monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-card__icon">💻</span>
+                    <h3 class="service-card__title">Embedded Systems</h3>
+                    <p class="service-card__description">Microcontroller programming, hardware-software integration, and custom firmware development</p>
+                    <ul class="service-card__features">
+                        <li>Microcontroller Programming</li>
+                        <li>Hardware Integration</li>
+                        <li>Real-time Systems</li>
+                        <li>Custom Firmware</li>
+                        <li>Circuit Design</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-card__icon">🤖</span>
+                    <h3 class="service-card__title">Robotics & Automation</h3>
+                    <p class="service-card__description">Autonomous robots, line following systems, PID control, and intelligent navigation</p>
+                    <ul class="service-card__features">
+                        <li>Line Following Robots</li>
+                        <li>PID Control Systems</li>
+                        <li>Autonomous Navigation</li>
+                        <li>Maze Solving</li>
+                        <li>Motion Control</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-card__icon">🧠</span>
+                    <h3 class="service-card__title">AI & Machine Learning</h3>
+                    <p class="service-card__description">Intelligent chatbots, ML models, automation solutions, and AI-powered applications</p>
+                    <ul class="service-card__features">
+                        <li>Conversational AI</li>
+                        <li>Machine Learning Models</li>
+                        <li>Natural Language Processing</li>
+                        <li>Automated Systems</li>
+                        <li>Intelligent Analytics</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-card__icon">👁️</span>
+                    <h3 class="service-card__title">Computer Vision</h3>
+                    <p class="service-card__description">OpenCV projects, image processing, object detection, and visual recognition systems</p>
+                    <ul class="service-card__features">
+                        <li>OpenCV Development</li>
+                        <li>Image Processing</li>
+                        <li>Object Detection</li>
+                        <li>Visual Recognition</li>
+                        <li>Video Analytics</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-card__icon">🔮</span>
+                    <h3 class="service-card__title">Cognitive IoT</h3>
+                    <p class="service-card__description">Intelligent connected systems, smart analytics, and cognitive computing solutions</p>
+                    <ul class="service-card__features">
+                        <li>Smart Analytics</li>
+                        <li>Cognitive Computing</li>
+                        <li>Intelligent Sensors</li>
+                        <li>Predictive Systems</li>
+                        <li>Data Intelligence</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about__text">
+                <h2>About PulseI0</h2>
+                <p>We are passionate technology specialists dedicated to bringing your innovative ideas to life. With expertise spanning IoT development, embedded systems, robotics, and AI solutions, we deliver comprehensive technology services that bridge the gap between hardware and software.</p>
+                <p>Our approach combines deep technical knowledge with practical engineering skills to create robust, scalable solutions. From concept to deployment, we ensure every project meets the highest standards of quality and performance.</p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Final-year Engineering Student</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-microchip"></i>
+                    <span>ESP32 & Arduino Specialist</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-robot"></i>
+                    <span>AI/ML Implementation</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-eye"></i>
+                    <span>OpenCV & Computer Vision</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Web Dashboard Development</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>PID Control Systems</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Cognitive IoT Solutions</span>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Complete Solution Delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact__info">
+                <h2>Let's Work Together</h2>
+                <p1>Ready to transform your ideas into reality? Get in touch with us today.</p1>
+                <p2>                </p2>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>pulseioacademy@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 9845604487, +91 8867273601</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>India</span>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <form class="contact__form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="Email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Phone" placeholder="Your WhatsApp Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="ProjectType" placeholder="Project Type" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="Message" rows="5" placeholder="Tell us about your project..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary" style="width: 100%;">Send Message</button>
+                <div id="formStatus" style="margin-top:1rem;color:var(--primary-green);"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <h3>PulseIO</h3>
+                <p style="color: #94A3B8;">Advanced Technology Solutions</p>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 1rem;">Services</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;"><a href="#services">IoT Solutions</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#services">Embedded Systems</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#services">Robotics</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#services">AI & Machine Learning</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 1rem;">Company</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;"><a href="#about">About</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #374151; color: #94A3B8;">
+            <p>&copy; 2025 PulseI0. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+        data: {
+            Name: form.Name.value,
+            Email: form.Email.value,
+            Phone: form.Phone.value,
+            ProjectType: form.ProjectType.value,
+            Message: form.Message.value
+        }
+    };
+    const status = document.getElementById('formStatus');
+    status.textContent = 'Sending...';
+    try {
+        const res = await fetch('https://sheetdb.io/api/v1/yc11d1drwl99q', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            status.textContent = 'Thank you! Your message has been sent.';
+            form.reset();
+        } else {
+            status.textContent = 'Error sending message. Please try again.';
+        }
+    } catch {
+        status.textContent = 'Network error. Please try again.';
+    }
+});
+</script>
+</body>
+</html>
