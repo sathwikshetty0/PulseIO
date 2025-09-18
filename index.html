@@ -148,6 +148,9 @@
         
         /* Hero Section */
         .hero {
+            min-height: 100vh; /* Cover full screen */
+            display: flex;
+            align-items: center;
             padding: 8rem 0 4rem;
             background: 
                 radial-gradient(circle at 25% 25%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
@@ -178,12 +181,12 @@
         }
         
         .hero .container {
-            position: relative;
-            z-index: 1;
+            min-height: 60vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: var(--space-16);
             align-items: center;
+            justify-content: center;
         }
         
         .hero__content h1 {
@@ -586,19 +589,45 @@
                 display: block;
             }
             
+            .hero {
+                min-height: 100vh;
+                padding: 6rem 0 2rem;
+                display: flex;
+                align-items: flex-start;
+            }
             .hero .container {
                 grid-template-columns: 1fr;
                 text-align: center;
+                min-height: 70vh;
+                gap: var(--space-8);
+                padding-top: var(--space-8);
             }
-            
             .hero__content h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: var(--space-4);
             }
-            
+            .hero__content p {
+                font-size: 1rem;
+                margin-bottom: var(--space-6);
+            }
+            .hero__buttons {
+                flex-direction: column;
+                gap: var(--space-3);
+                align-items: center;
+            }
+            .btn {
+                padding: var(--space-3) var(--space-6);
+                font-size: 1rem;
+            }
             .tech-icons {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* Show 3 per row */
+                gap: var(--space-3);
+                margin-top: var(--space-6);
             }
-            
+            .tech-icon {
+                padding: var(--space-4);
+                font-size: 1.5rem;
+            }
             .services__grid {
                 grid-template-columns: 1fr;
             }
